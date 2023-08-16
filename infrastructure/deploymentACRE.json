@@ -168,7 +168,7 @@
     }
   },
   "variables": {
-    "WebAppImageName": "DOCKER|fruocco/oai-embeddings",
+    "WebAppImageName": "DOCKER|derickpimenta/oai-embeddings",
     "BlobContainerName": "documents",
     "FileShareName": "redisdata",
     "QueueName": "doc-processing",
@@ -383,11 +383,11 @@
             {
               "name": "OPENAI_DEPLOYMENT_TYPE",
               "value": "[parameters('OpenAIDeploymentType')]"
-            },            
+            },
             {
               "name": "OPENAI_EMBEDDINGS_ENGINE_DOC",
               "value": "[parameters('OpenAIEmbeddingsEngineDoc')]"
-            },           
+            },
             {
               "name": "OPENAI_EMBEDDINGS_ENGINE_QUERY",
               "value": "[parameters('OpenAIEmbeddingsEngineQuery')]"
@@ -435,7 +435,7 @@
             {
               "name": "REDIS_PASSWORD",
               "value": "[listKeys(resourceId('Microsoft.Cache/redisEnterprise/databases', parameters('RedisName'), 'default'), '2023-03-01-preview').primaryKey]"
-            }, 
+            },
 			{
               "name": "REDIS_PORT",
               "value": 10000
@@ -463,7 +463,7 @@
             ]
           },
           "use32BitWorkerProcess": false,
-          "linuxFxVersion": "DOCKER|fruocco/oai-batch:latest",
+          "linuxFxVersion": "DOCKER|derickpimenta/oai-batch:latest",
           "appCommandLine": "",
           "alwaysOn": true
         },

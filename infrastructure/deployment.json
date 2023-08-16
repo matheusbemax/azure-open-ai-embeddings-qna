@@ -177,7 +177,7 @@
   },
   "variables": {
     "ContainerImageName": "redis/redis-stack-server:latest",
-    "WebAppImageName": "DOCKER|fruocco/oai-embeddings",
+    "WebAppImageName": "DOCKER|derickpimenta/oai-embeddings",
     "BlobContainerName": "documents",
     "FileShareName": "redisdata",
     "QueueName": "doc-processing",
@@ -344,11 +344,11 @@
             {
               "name": "OPENAI_DEPLOYMENT_TYPE",
               "value": "[parameters('OpenAIDeploymentType')]"
-            },            
+            },
             {
               "name": "OPENAI_EMBEDDINGS_ENGINE_DOC",
               "value": "[parameters('OpenAIEmbeddingsEngineDoc')]"
-            },           
+            },
             {
               "name": "OPENAI_EMBEDDINGS_ENGINE_QUERY",
               "value": "[parameters('OpenAIEmbeddingsEngineQuery')]"
@@ -420,7 +420,7 @@
             ]
           },
           "use32BitWorkerProcess": false,
-          "linuxFxVersion": "DOCKER|fruocco/oai-batch:latest",
+          "linuxFxVersion": "DOCKER|derickpimenta/oai-batch:latest",
           "appCommandLine": "",
           "alwaysOn": true
         },
