@@ -41,9 +41,13 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
-    - name: Login Azure CR
-      run: |
-        docker login fegpt2.azurecr.io -u ${{ secrets.AZURE_LOGIN }} -p ${{ secrets.AZURE_PASSWORD }}
+    - name: Log in to registry
+      uses: docker/login-action@v2
+      with:
+        registry: https://fegpt2.azurecr.io/
+        username: ${{ secrets.AzureAppService_ContainerUsername_5e8ff57a22cf49c1af0c55cdc70a02bd }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_894eea4197f04394b03f94bafc39dd41 }}
+
     - name: Deploy to Azure Web App
       id: deploy-to-webapp
       uses: azure/webapps-deploy@v2
