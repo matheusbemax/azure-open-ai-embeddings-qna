@@ -48,4 +48,4 @@ jobs:
         app-name: 'fegpt2'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_ee52bade4c254f5386c6de33ff6b34dc }}
-        images: 'fegpt2.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_5e8ff57a22cf49c1af0c55cdc70a02bd }}/fegpt2:latest'
+        images: 'fegpt2.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_5e8ff57a22cf49c1af0c55cdc70a02bd }}/fegpt2:37188f9fdf1db67a48fab815e69255b88691c2af'
