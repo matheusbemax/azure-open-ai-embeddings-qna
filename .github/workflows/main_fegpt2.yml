@@ -30,6 +30,7 @@ jobs:
       run: |
         docker build . --file WebApp.Dockerfile --tag fegpt2.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_5e8ff57a22cf49c1af0c55cdc70a02bd }}/fegpt2-web:${{ github.sha }}
         docker build . --file BatchProcess.Dockerfile --tag fegpt2.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_5e8ff57a22cf49c1af0c55cdc70a02bd }}/fegpt2-batch:${{ github.sha }}
+        docker login -u ${{ secrets.AZURE_LOGIN}} -p ${{ secrets.AZURE_PASSWORD}}
         docker push fegpt2.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_5e8ff57a22cf49c1af0c55cdc70a02bd }}/fegpt2-web:${{ github.sha }}
         docker push fegpt2.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_5e8ff57a22cf49c1af0c55cdc70a02bd }}/fegpt2-batch:${{ github.sha }}
 
