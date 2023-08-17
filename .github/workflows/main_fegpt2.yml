@@ -17,7 +17,7 @@ jobs:
       with:
         username: derickpimenta
         # Password or personal access token used to log against the Docker registry
-        password: Derick991*
+        password: derick1991
 
     - uses: actions/checkout@v3
     - name: Build the Docker image
