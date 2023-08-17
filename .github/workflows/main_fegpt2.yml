@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy container app to Azure Web App - fegpt2
+name: Build and deploy container app to Azure Web App - oai
 
 on:
   push:
@@ -19,19 +19,19 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
 
-    - name: Log in to registry
+    - name: Log in to Docker Hub
       uses: docker/login-action@v2
       with:
-        registry: https://fegpt2.azurecr.io/
-        username: ${{ secrets.AzureAppService_ContainerUsername_5e8ff57a22cf49c1af0c55cdc70a02bd }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_894eea4197f04394b03f94bafc39dd41 }}
+        registry: https://index.docker.io/v1/
+        username: derickpimenta
+        password: derick1991
 
-    - name: Build and push container images to registry
+    - name: Build and push container images to Docker Hub
       run: |
-        docker build . --file WebApp.Dockerfile --tag fegpt2.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_5e8ff57a22cf49c1af0c55cdc70a02bd }}/fegpt2-web:${{ github.sha }}
-        docker build . --file BatchProcess.Dockerfile --tag fegpt2.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_5e8ff57a22cf49c1af0c55cdc70a02bd }}/fegpt2-batch:${{ github.sha }}
-        docker push fegpt2.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_5e8ff57a22cf49c1af0c55cdc70a02bd }}/fegpt2-web:${{ github.sha }}
-        docker push fegpt2.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_5e8ff57a22cf49c1af0c55cdc70a02bd }}/fegpt2-batch:${{ github.sha }}
+        docker build . --file WebApp.Dockerfile --tag derickpimenta/oai-embeddings:${{ github.sha }}
+        docker build . --file BatchProcess.Dockerfile --tag derickpimenta/oai-batch:${{ github.sha }}
+        docker push derickpimenta/oai-embeddings:${{ github.sha }}
+        docker push derickpimenta/oai-batch:${{ github.sha }}
 
   deploy:
     runs-on: ubuntu-latest
@@ -45,7 +45,7 @@ jobs:
       id: deploy-to-webapp
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'fegpt2'
+        app-name: 'oai' # Use o nome do seu aplicativo Azure Web App
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_ee52bade4c254f5386c6de33ff6b34dc }}
-        images: 'fegpt2.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_5e8ff57a22cf49c1af0c55cdc70a02bd }}/fegpt2:${{ github.sha }}'
+        images: 'derickpimenta/oai-embeddings:${{ github.sha }},derickpimenta/oai-batch:${{ github.sha }}'
