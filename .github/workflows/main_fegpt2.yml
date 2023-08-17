@@ -26,12 +26,12 @@ jobs:
         username: ${{ secrets.AzureAppService_ContainerUsername_5e8ff57a22cf49c1af0c55cdc70a02bd }}
         password: ${{ secrets.AzureAppService_ContainerPassword_894eea4197f04394b03f94bafc39dd41 }}
 
-    - name: Build and push container image to registry
-      uses: docker/build-push-action@v3
-      with:
-        push: true
-        tags: fegpt2.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_5e8ff57a22cf49c1af0c55cdc70a02bd }}/fegpt2:${{ github.sha }}
-        file: ./WebApp.Dockerfile
+    - name: Build and push container images to registry
+      run: |
+        docker build . --file WebApp.Dockerfile --tag fegpt2.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_5e8ff57a22cf49c1af0c55cdc70a02bd }}/fegpt2-web:${{ github.sha }}
+        docker build . --file BatchProcess.Dockerfile --tag fegpt2.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_5e8ff57a22cf49c1af0c55cdc70a02bd }}/fegpt2-batch:${{ github.sha }}
+        docker push fegpt2.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_5e8ff57a22cf49c1af0c55cdc70a02bd }}/fegpt2-web:${{ github.sha }}
+        docker push fegpt2.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_5e8ff57a22cf49c1af0c55cdc70a02bd }}/fegpt2-batch:${{ github.sha }}
 
   deploy:
     runs-on: ubuntu-latest
